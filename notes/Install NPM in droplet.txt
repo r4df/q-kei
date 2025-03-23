@@ -1,0 +1,42 @@
+🛠 Step 1: Install Node.js and npm
+Run the following commands in your Droplet's terminal:
+
+bash
+Copy
+Edit
+sudo apt update
+sudo apt install -y nodejs npm
+Check if the installation was successful:
+
+bash
+Copy
+Edit
+node -v
+npm -v
+You should see version numbers.
+
+🛠 Step 2: Install the Latest Version (Recommended)
+The default Node.js version from apt may be outdated. To install the latest stable version, run:
+
+bash
+Copy
+Edit
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+Then check the versions again:
+
+bash
+Copy
+Edit
+node -v
+npm -v
+🛠 Step 3: Run npm Commands
+Now, go to your frontend folder and install dependencies:
+
+bash
+Copy
+Edit
+cd /var/www/your-repo/frontend
+npm install
+npm run build
+Let me know if you run into any issues! 🚀
