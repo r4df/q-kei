@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy Flask App on DigitalOcean Droplet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Deploy Flask App on DigitalOcean Droplet</h1>
+    <p>Follow these steps to deploy your Flask app on a DigitalOcean Droplet.</p>
+
+    <h2>1. Connect to Your Droplet</h2>
+    <pre><code>ssh root@your_droplet_ip</code></pre>
+    <p>Replace <code>your_droplet_ip</code> with your actual Droplet IP address.</p>
+
+    <h2>2. Install Required Packages</h2>
+    <pre><code>apt update && apt upgrade -y
+apt install python3-pip python3-dev python3-venv nginx git -y</code></pre>
+
+    <h2>3. Set Up Your Flask App</h2>
+    <p>Clone your Git repository or upload your Flask app to the Droplet:</p>
+    <pre><code>cd /var/www
+git clone https://github.com/your_username/your_repo.git
+cd your_repo</code></pre>
+
+    <h2>4. Set Up a Virtual Environment</h2>
+    <pre><code>python3 -m venv venv
+source venv/bin/activate</code></pre>
+
+    <h2>5. Install Your Flask App's Dependencies</h2>
+    <pre><code>pip install -r requirements.txt</code></pre>
+
+    <h2>6. Test Your Flask App</h2>
+    <p>Make sure your Flask app runs correctly:</p>
+    <pre><code>flask run --host=0.0.0.0</code></pre>
+    <p>This will run the app on all interfaces, allowing it to be accessed via your Droplet's IP.</p>
+
+    <h2>7. Install and Configure Gunicorn</h2>
+    <pre><code>pip install gunicorn</code></pre>
+    <p>Run Gunicorn to test:</p>
+    <pre><code>gunicorn --workers 3 app:app</code></pre>
+    <p>Replace <code>app</code> with the name of your Flask app file.</p>
+
+    <h2>8. Set Up Nginx</h2>
+    <p>Create a new Nginx configuration file for your Flask app:</p>
+    <pre><code>sudo nano /etc/nginx/sites-available/your_flask_app</code></pre>
+    <p>Add the following configuration (replace placeholders with your app details):</p>
+    <pre><code>server {
+    listen 80;
+    server_name your_droplet_ip;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</code></pre>
+    <p>Create a symbolic link to enable the site:</p>
+    <pre><code>sudo ln -s /etc/nginx/sites-available/your_flask_app /etc/nginx/sites-enabled</code></pre>
+    <p>Test Nginx for errors:</p>
+    <pre><code>sudo nginx -t</code></pre>
+    <p>Restart Nginx:</p>
+    <pre><code>sudo systemctl restart nginx</code></pre>
+
+    <h2>9. Set Up Gunicorn as a Service</h2>
+    <p>Create a systemd service file to manage Gunicorn:</p>
+    <pre><code>sudo nano /etc/systemd/system/your_flask_app.service</code></pre>
+    <p>Add the following content:</p>
+    <pre><code>[Unit]
+Description=Gunicorn instance to serve Flask App
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/your_repo
+Environment="PATH=/var/www/your_repo/venv/bin"
+ExecStart=/var/www/your_repo/venv/bin/gunicorn --workers 3 --bind unix:/var/www/your_repo/your_flask_app.sock app:app
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+    <p>Enable and start the Gunicorn service:</p>
+    <pre><code>sudo systemctl start your_flask_app
+sudo systemctl enable your_flask_app</code></pre>
+
+    <h2>10. Final Testing</h2>
+    <p>Now, you should be able to visit your Droplet's IP address in a browser, and your Flask app will be live.</p>
+
+</body>
+</html>
