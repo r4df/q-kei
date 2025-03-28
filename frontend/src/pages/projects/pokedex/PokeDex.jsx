@@ -29,8 +29,9 @@ export default class PokeDex extends Component {
 
     handleInputSearch = (event) => {
         const search_val = event.target.value ? event.target.value : "test"
+        const search_val_lc = search_val.toLowerCase()
         this.setState({
-            searchValue: search_val,
+            searchValue: search_val_lc,
         });
     };
 
@@ -42,6 +43,7 @@ export default class PokeDex extends Component {
                 return response.json();
             })
             .then((jsonData) => {
+                console.info(jsonData)
                 this.setState({
                     data: jsonData,
                 });
@@ -61,9 +63,9 @@ export default class PokeDex extends Component {
 
 
                     {/* Search Button */}
-                    <div className="border border-1 border-dark rounded p-3 mb-3"  style={{backgroundColor:"#8EA3A6"}}>
+                    <div className="border border-1 border-dark rounded p-3 mb-3" style={{ backgroundColor: "#8EA3A6" }}>
                         <div className="d-flex flex-column flex-lg-row gap-2">
-                            <input type="text" className="form-control" placeholder="Input Pokemon name" onChange={this.handleInputSearch}></input>
+                            <input type="text" className="form-control" placeholder="e.g. pikachu" onChange={this.handleInputSearch}></input>
                             <button className="btn btn-primary" type="button" id="button-search" onClick={this.handlerGetUrlData}>
                                 <span className="d-flex flex-row justify-content-center">Search<i className="bi bi-search ms-1"></i></span>
                             </button>
@@ -71,35 +73,42 @@ export default class PokeDex extends Component {
                     </div>
 
                     {/* Result */}
-                    <div className="d-flex border border-1 border-dark rounded p-3 flex-lg-row flex-column" style={{backgroundColor:"#8EA3A6"}}>
+                    <div className="d-flex flex-lg-row flex-column border border-1 border-black p-3 rounded" style={{ backgroundColor: "#8EA3A6" }}>
 
-                        <div className="d-flex flex-column flex-lg-row">
-                            <div className="d-flex justify-content-center border border-1 border-dark rounded p-3 me-lg-3 mb-lg-0 mb-3" style={{backgroundColor:"#E6E9AF"}}>
-                                <img src={this.state.data.sprites.front_default} alt="pokemon"></img>
+                        <>
+                            <div className="d-lg-flex d-none align-items-center w-25 border border-1 border-black p-3 mb-0 me-3 rounded" style={{ backgroundColor: "#E6E9AF" }}>
+                                <img className="w-100" src={this.state.data.sprites.front_default} alt="pokemon"></img>
                             </div>
 
-                            <div className="d-flex flex-column justify-content-center border border-1 border-dark rounded p-3 me-lg-3  mb-lg-0 mb-3" style={{backgroundColor:"#E6E9AF"}}>
-                                <p>No. {this.state.data.id}</p>
+                            <div className="d-lg-none d-flex justify-content-center border border-1 border-black p-3 mb-3 rounded" style={{ backgroundColor: "#E6E9AF" }}>
+                                <img className="w-50" src={this.state.data.sprites.front_default} alt="pokemon"></img>
+                            </div>
+                        </>
+
+
+                        <div className="flex-fill">
+
+                            <div className="border border-1 border-black p-3 rounded mb-3" style={{ backgroundColor: "#E6E9AF" }}>
+                                <p>No.{this.state.data.id}</p>
                                 <p>Name: {this.state.data.name.toUpperCase()}</p>
                             </div>
-                        </div>
 
-                        <div className="d-flex flex-column flex-lg-row">
-                            <div className="border border-1 border-dark rounded p-3 mb-lg-0 mb-3 me-lg-3 me-0" style={{backgroundColor:"#E6E9AF"}}>
+                            <div className="border border-1 border-black p-3 rounded mb-3" style={{ backgroundColor: "#E6E9AF" }}>
                                 <p>Type: </p>
                                 <div className="d-flex flex-row">
                                     {this.state.data.types.map((item, index) => (
-                                        <div  key={index} className={`pokedex-pd-type-${item.type.name}`}>
+                                        <div key={index} className={`pokedex-pd-type-${item.type.name}`}>
                                             <p className="m-0 p-0">{item.type.name}</p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="border border-1 border-dark rounded p-3 " style={{backgroundColor:"#E6E9AF"}}>
+                            <div className="border border-1 border-black p-3 rounded" style={{ backgroundColor: "#E6E9AF" }}>
                                 <p>Ht: {Number(this.state.data.height) / 10} m</p>
                                 <p>Wt: {Number(this.state.data.weight) / 10} kg</p>
                             </div>
+
                         </div>
 
 
