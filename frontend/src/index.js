@@ -6,6 +6,7 @@ import Header from "./component/header/Header";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
+import Projects from "./pages/projects/Projects";
 import reportWebVitals from "./reportWebVitals";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -18,11 +19,14 @@ root.render(
   <React.StrictMode>
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </main>
     </Router>
   </React.StrictMode>
 );

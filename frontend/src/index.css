@@ -4,4 +4,21 @@
     --pallette-1 : #EBE8DB;
     --pallette-2 :#D76C82;
     --pallette-3 : #B03052;
+    --pallette-4 : #3D0301;
+}
+
+body{
+    background-color: var(--pallette-3);
+}
+
+div.app-bg-pallette-1{
+    background-color: var(--pallette-1);
+}
+
+.app-bg-pallette-3 {
+    background-color: var(--pallette-3);
+}
+
+.app-bg-pallette-4 {
+    background-color: var(--pallette-4);
 }

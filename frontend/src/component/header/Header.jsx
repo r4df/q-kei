@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <header
+      className=" sticky-top"
       style={{
         backgroundColor: "var(--pallette-1)",
         color: "var(--pallette-3)",
@@ -41,7 +42,7 @@ function Header() {
                   to="/"
                   style={{ color: "var(--pallette-3)" }}
                 >
-                  <i class="bi bi-house-fill me-1"></i>
+                  <i className="bi bi-house-fill me-1"></i>
                   Home
                 </Link>
               </li>
@@ -51,7 +52,7 @@ function Header() {
                   to="/about"
                   style={{ color: "var(--pallette-3)" }}
                 >
-                  <i class="bi bi-person-fill me-1"></i>
+                  <i className="bi bi-person-fill me-1"></i>
                   About
                 </Link>
               </li>
@@ -61,7 +62,7 @@ function Header() {
                   to="/contact"
                   style={{ color: "var(--pallette-3)" }}
                 >
-                  <i class="bi bi-envelope-fill me-1"></i>
+                  <i className="bi bi-envelope-fill me-1"></i>
                   Contact
                 </Link>
               </li>
