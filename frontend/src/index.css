@@ -22,3 +22,8 @@ div.app-bg-pallette-1{
 .app-bg-pallette-4 {
     background-color: var(--pallette-4);
 }
+
+@font-face {
+    font-family: "zx-spectrum";
+    src: URL("/src/assets/fonts/zx_spectrum/zx-spectrum.ttf") format("truetype");
+}

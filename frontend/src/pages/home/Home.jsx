@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="container overflow-auto" style={{ height: 1000 }}>
-      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded">
-        <h1>Hello and Welcome!</h1>
+    <div className="container overflow-auto" >
+      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }}>
+        <h1 className="m-0">Hello and Welcome!</h1>
       </div>
 
-      <div className="m-2 px-5 py-3 app-bg-pallette-1">
+      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded">
         <h2>Projects</h2>
-        <div className=" overflow-auto">
+        <div className="table-responsive-xxl">
           <table className="table table-sm table-bordered">
             <caption>This are the current projects in this site.</caption>
             <thead className=" table-dark">
@@ -24,7 +25,9 @@ function Home() {
             <tbody>
               <tr>
                 <td>1</td>
-                <td>Pokedex</td>
+                <td>
+                  <Link to="/projects/pokedex">Pokedex</Link>
+                </td>
                 <td>Simple pokedex</td>
                 <td>On-going</td>
                 <td>25-03-28</td>
