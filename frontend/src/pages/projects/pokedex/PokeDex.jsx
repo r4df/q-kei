@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./style.css"
+import ContainerType1 from '../../../component/ContainerType1'
 import PokemonLogo96 from "./assets/icons8-pokemon-ball-96.png"
 
 
@@ -55,14 +56,11 @@ export default class PokeDex extends Component {
     render() {
         return (
             <div className="container">
-                
-                <div className="container d-lg-block d-none mb-3 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }} >
+                <ContainerType1 className="d-lg-block d-none">
                     <h1 className="m-0">PokeDex</h1>
-                </div>
+                </ContainerType1>
 
-                <div className="container app-bg-pallette-1 py-3 rounded" style={{ fontFamily: "zx-spectrum" }} >
-
-
+                <ContainerType1 style={{ fontFamily: "zx-spectrum" }}>
                     {/* Search Button */}
                     <div className="border border-1 border-dark rounded p-3 mb-3" style={{ backgroundColor: "#8EA3A6" }}>
                         <div className="d-flex flex-column flex-lg-row gap-2">
@@ -114,8 +112,7 @@ export default class PokeDex extends Component {
 
 
                     </div>
-
-                </div>
+                </ContainerType1>
             </div>
         );
     }

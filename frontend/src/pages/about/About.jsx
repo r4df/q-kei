@@ -1,14 +1,16 @@
 import React from "react";
+import ContainerType1 from "../../component/ContainerType1";
 
 function About() {
   return (
-    <div className="container overflow-auto" style={{color:"var(--pallette-3)"}}>
-      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded">
-        <h1>About</h1>
-      </div>
+    <div className="container overflow-auto" style={{ color: "var(--pallette-3)" }}>
 
-      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded">
-        <p style={{color:"var(--pallette-3)"}}>
+      <ContainerType1>
+        <h1>About</h1>
+      </ContainerType1>
+
+      <ContainerType1>
+        <p style={{ color: "var(--pallette-3)" }}>
           Hi! I'm Dolfo. I'm a software engineer at TechnoPro Engineering.
           Currently dispatched at Nissan Automotive. Right now, I am in charge
           of improving our workflows and creating tools and applications to
@@ -16,11 +18,12 @@ function About() {
           which I found interesting. Its a blend of logic and creativity which I
           really enjoy.
         </p>
-        <p style={{color:"var(--pallette-3)"}}>
+        <p style={{ color: "var(--pallette-3)" }}>
           Education Finished <strong>B.S Computer Engineering</strong> at University of the East
           (Philippines) (June 2006 ~ March 2012)
         </p>
-      </div>
+      </ContainerType1>
+      
     </div>
   );
 }

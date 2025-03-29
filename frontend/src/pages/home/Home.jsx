@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ContainerType1 from "../../component/ContainerType1";
 
 function Home() {
   return (
     <div className="container" >
-      <div className="container mb-3 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }}>
+      <ContainerType1>
         <h1 className="m-0">Hello and Welcome!</h1>
-      </div>
+      </ContainerType1>
 
-      <div className="container py-3 rounded app-bg-pallette-1">
+      <ContainerType1>
         <h2>Projects</h2>
         <div className="table-responsive-xxl">
           <table className="table table-sm table-bordered">
@@ -29,14 +30,17 @@ function Home() {
                   <Link to="/projects/pokedex">Pokedex</Link>
                 </td>
                 <td>Simple pokedex</td>
-                <td>On-going</td>
+                <td>
+                  <span className="text-success">完了 <i className="bi bi-check-circle-fill"></i></span></td>
                 <td>25-03-28</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>TicTacToe</td>
+                <td>
+                  <Link to="/projects/tictactoe">TicTacToe</Link>
+                </td>
                 <td>-</td>
-                <td>On-going</td>
+                <td className="text-primary">進行中</td>
                 <td>25-03-28</td>
               </tr>
               <tr>
@@ -45,13 +49,13 @@ function Home() {
                 <td>
                   No database attached. All inputs will be vanished on refresh.
                 </td>
-                <td>On-going</td>
+                <td className="text-warning">保留</td>
                 <td>25-03-28</td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
+      </ContainerType1>
     </div>
   );
 }

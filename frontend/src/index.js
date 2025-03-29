@@ -8,6 +8,7 @@ import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import Projects from "./pages/projects/Projects";
 import PokeDex from "./pages/projects/pokedex/PokeDex"
+import TicTacToe from "./pages/projects/tictactoe/TicTacToe";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -28,6 +29,7 @@ root.render(
           <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/pokedex" element={<PokeDex />} />
+          <Route path="/projects/tictactoe" element={<TicTacToe />} />
         </Routes>
       </main>
     </Router>
