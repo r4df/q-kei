@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="container overflow-auto" >
-      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }}>
+    <div className="container" >
+      <div className="container mb-3 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }}>
         <h1 className="m-0">Hello and Welcome!</h1>
       </div>
 
-      <div className="m-2 px-5 py-3 app-bg-pallette-1 rounded">
+      <div className="container py-3 rounded app-bg-pallette-1">
         <h2>Projects</h2>
         <div className="table-responsive-xxl">
           <table className="table table-sm table-bordered">

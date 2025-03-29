@@ -55,7 +55,8 @@ export default class PokeDex extends Component {
     render() {
         return (
             <div className="container">
-                <div className="container my-3 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }} >
+                
+                <div className="container d-lg-block d-none mb-3 py-3 app-bg-pallette-1 rounded" style={{ color: "var(--pallette-3)" }} >
                     <h1 className="m-0">PokeDex</h1>
                 </div>
 
