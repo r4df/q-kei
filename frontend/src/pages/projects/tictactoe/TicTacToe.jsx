@@ -64,8 +64,8 @@ const TicTacToe = () => {
             </ContainerType1>
 
             <ContainerType1 style={{ fontFamily: "zx-spectrum" }}>
-                <div className='container mb-3 col-lg-4'>
-                    <div className="row">
+                <div className='container col-lg-4'>
+                    <div className="row mb-3">
                         {
                             board.map((item, index) => (
                                 <div className='col-4 p-0 m-0' key={index}>
@@ -79,14 +79,13 @@ const TicTacToe = () => {
                             ))
                         }
                     </div>
-                </div>
 
-                <div className='container col-lg-4'>
                     <div className='row'>
-                        <p className='p-0'>Status: {winner ? `Winner -> ${winner}` : `-`}</p>
+                        <p className='p-0'>Status: {winner ? `${winner} won` : `-`}</p>
                     </div>
+                    
                     <div className='row'>
-                        <button className='btn btn-primary mb-3' onClick={() => handleClickReset()}>Reset</button>
+                        <button className='btn btn-primary mb-3' onClick={() => handleClickReset()}>Reset<i class="bi bi-arrow-clockwise ms-3"></i></button>
                     </div>
                 </div>
 
