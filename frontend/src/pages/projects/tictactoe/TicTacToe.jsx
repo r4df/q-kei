@@ -5,15 +5,25 @@ const SYMBOL_O = "O"
 
 const TicTacToe = () => {
     const [board, setBoard] = useState(Array(9).fill(null))
+    const [panelColor, setPanelColor] = useState(Array(9).fill("btn-dark"))
     const [currentMove, setCurrentMove] = useState(SYMBOL_X)
 
     const handleClickTicTac = (index) => {
 
-        if (board[index] || checkWinner(board)) return;
+        const initCheckWinnerResult = checkWinner(board)
+        if (board[index] || initCheckWinnerResult[0]) return;
 
         const newBoard = board.slice() // Shallow copy (To make sure update is detected)
+        let newPanelColor = panelColor.slice() // Shallow copy (To make sure update is detected)
+
         newBoard[index] = currentMove
+        newPanelColor[index] = "btn-light"
+
+        const reCheckWinnerResult = checkWinner(newBoard)
+        newPanelColor = winnerPanel(newPanelColor, reCheckWinnerResult[1])
+
         setBoard(newBoard)
+        setPanelColor(newPanelColor)
         changeMove()
 
         return
@@ -21,8 +31,19 @@ const TicTacToe = () => {
 
     const handleClickReset = () => {
         setBoard(Array(9).fill(null));
+        setPanelColor(Array(9).fill("btn-dark"));
         setCurrentMove(SYMBOL_X)
         return
+    }
+
+    const winnerPanel = (tempBoard, winningPattern) =>{
+        if(winningPattern){
+            const [a, b, c] = winningPattern
+            tempBoard[a] = "btn-success"
+            tempBoard[b] = "btn-success"
+            tempBoard[c] = "btn-success"
+        }
+        return tempBoard
     }
 
     const checkWinner = (tempBoard) => {
@@ -40,10 +61,10 @@ const TicTacToe = () => {
         for (const item of winnerCombinations) {
             const [a, b, c] = item
             if (tempBoard[a] && (tempBoard[a] === tempBoard[b] && tempBoard[b] === tempBoard[c])) {
-                return tempBoard[a]
+                return [tempBoard[a], item]
             }
         }
-        return null
+        return [null, null]
     }
 
     const changeMove = () => {
@@ -53,6 +74,7 @@ const TicTacToe = () => {
             setCurrentMove(SYMBOL_X)
         }
     }
+
 
     const winner = checkWinner(board);
 
@@ -70,7 +92,7 @@ const TicTacToe = () => {
                             board.map((item, index) => (
                                 <div className='col-4 p-0 m-0' key={index}>
                                     <button
-                                        className='btn btn-dark ratio ratio-1x1 w-100 h-100'
+                                        className={`btn ${panelColor[index]} ratio ratio-1x1 w-100 h-100 border border-1 border-gray`}
                                         key={index}
                                         onClick={() => handleClickTicTac(index)}>
                                         <span className='d-flex align-items-center justify-content-center fs-lg-4 fs-1'>{item}</span>
@@ -81,9 +103,9 @@ const TicTacToe = () => {
                     </div>
 
                     <div className='row'>
-                        <p className='p-0'>Status: {winner ? `${winner} won` : `-`}</p>
+                        <p className='p-0'>Status: {winner[0] ? `${winner[0]} won` : `-`}</p>
                     </div>
-                    
+
                     <div className='row'>
                         <button className='btn btn-primary mb-3' onClick={() => handleClickReset()}>Reset<i class="bi bi-arrow-clockwise ms-3"></i></button>
                     </div>
