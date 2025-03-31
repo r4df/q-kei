@@ -10,7 +10,7 @@ function Home() {
   const getStatusIcon = (status) => {
     switch (status) {
       case "完了":
-        return <span className="text-success">
+        return<span className="text-success">
           完了<i class="bi bi-check-circle-fill ms-1"></i>
         </span>
       case "進行中":
@@ -58,7 +58,7 @@ function Home() {
                     <td>{item.PN}</td>
                     <td>
                       <Link to={item.Link} className="d-flex flex-lg-row flex-column align-items-center">
-                        <img src={item.Icon} alt="icon" width={40} height={40} className="border border-1 p-1 mx-2 rounded" />
+                        <img src={item.Icon} alt="icon" width={40} height={40} className="border border-1 p-1 mx-2 rounded shadow-sm" />
                         {item.Title}
                       </Link>
                     </td>
