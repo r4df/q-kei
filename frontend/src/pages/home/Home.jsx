@@ -2,7 +2,35 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ContainerType1 from "../../component/ContainerType1";
 
+// JSON
+import ProjectListJson from "./001_ProjectList.json"
+
 function Home() {
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case "完了":
+        return <span className="text-success">
+          完了<i class="bi bi-check-circle-fill ms-1"></i>
+        </span>
+      case "進行中":
+        return <span className="text-primary">
+          進行中<i className="bi bi-arrow-repeat ms-1"></i>
+        </span>
+      case "保留中":
+        return <span className="text-warning">
+          保留中<i className="bi bi-pause-circle-fill ms-1"></i>
+        </span>
+      case "停止":
+        return <span className="text-danger">
+          停止<i className="bi-x-circle-fill ms-1"></i>
+        </span>
+
+      default:
+        return <span className="">XXX</span>
+    }
+  }
+
   return (
     <div className="container" >
       <ContainerType1>
@@ -24,34 +52,24 @@ function Home() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <Link to="/projects/pokedex">Pokedex</Link>
-                </td>
-                <td>Simple pokedex</td>
-                <td>
-                  <span className="text-success">完了 <i className="bi bi-check-circle-fill"></i></span></td>
-                <td>25-03-28</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <Link to="/projects/tictactoe">TicTacToe</Link>
-                </td>
-                <td>-</td>
-                <td className="text-primary">進行中</td>
-                <td>25-03-28</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>ToDo List</td>
-                <td>
-                  No database attached. All inputs will be vanished on refresh.
-                </td>
-                <td className="text-warning">保留</td>
-                <td>25-03-28</td>
-              </tr>
+              {
+                ProjectListJson.map((item, index) => (
+                  <tr>
+                    <td>{item.PN}</td>
+                    <td>
+                      <div className="d-flex flex-lg-row flex-column align-items-center">
+                        <img src={item.Icon} alt="icon" width={40} height={40} className="border border-1 p-1 mx-2 rounded" />
+                        <Link to={item.Link}>{item.Title}</Link>
+                      </div>
+                    </td>
+                    <td>{item.Description}</td>
+                    <td>
+                      {getStatusIcon(item.Status)}
+                    </td>
+                    <td>{item.LastUpdate}</td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>

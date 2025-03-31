@@ -81,7 +81,7 @@ const TicTacToe = () => {
     return (
         <div className='container'>
 
-            <ContainerType1>
+            <ContainerType1 className='d-lg-block d-none'>
                 <h1>TicTacToe</h1>
             </ContainerType1>
 
